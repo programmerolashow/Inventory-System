@@ -226,6 +226,8 @@ function AppContent() {
             auditLogs={auditLogs}
             apiQueryLogs={apiQueryLogs}
             onDataMutated={handleDataMutated}
+            currentPath={currentPath}
+            onNavigate={navigate}
           />
         </main>
 

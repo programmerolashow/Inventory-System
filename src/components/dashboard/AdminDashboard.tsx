@@ -36,6 +36,8 @@ interface AdminDashboardProps {
   auditLogs: PlatformAuditLog[];
   apiQueryLogs: ApiQueryLog[];
   onDataMutated: () => void;
+  currentPath?: string;
+  onNavigate?: (path: string) => void;
 }
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
@@ -45,10 +47,33 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   auditLogs,
   apiQueryLogs,
   onDataMutated,
+  currentPath = '/admin/dashboard',
+  onNavigate,
 }) => {
-  const [adminTab, setAdminTab] = useState<
+  const getTabFromPath = (path: string): 'overview' | 'tenants' | 'rbac' | 'audit_logs' | 'api_gateway' | 'system_config' => {
+    if (path.includes('/users') || path.includes('/rbac')) return 'rbac';
+    if (path.includes('/errors') || path.includes('/audit') || path.includes('/logs')) return 'audit_logs';
+    if (path.includes('/tenants') || path.includes('/businesses')) return 'tenants';
+    if (path.includes('/api') || path.includes('/gateway')) return 'api_gateway';
+    if (path.includes('/config')) return 'system_config';
+    return 'overview';
+  };
+
+  const [adminTab, setAdminTabState] = useState<
     'overview' | 'tenants' | 'rbac' | 'audit_logs' | 'api_gateway' | 'system_config'
-  >('overview');
+  >(() => getTabFromPath(currentPath));
+
+  const setAdminTab = (tab: 'overview' | 'tenants' | 'rbac' | 'audit_logs' | 'api_gateway' | 'system_config') => {
+    setAdminTabState(tab);
+    if (onNavigate) {
+      if (tab === 'rbac') onNavigate('/admin/users');
+      else if (tab === 'audit_logs') onNavigate('/admin/errors');
+      else if (tab === 'tenants') onNavigate('/admin/tenants');
+      else if (tab === 'api_gateway') onNavigate('/admin/api');
+      else if (tab === 'system_config') onNavigate('/admin/config');
+      else onNavigate('/admin/dashboard');
+    }
+  };
 
   const [userSearchTerm, setUserSearchTerm] = useState('');
   const [selectedUserForEdit, setSelectedUserForEdit] = useState<User | null>(null);

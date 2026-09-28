@@ -243,12 +243,12 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-slate-100 flex flex-col justify-between p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col justify-between p-4 sm:p-6 md:p-8">
       {/* Top Bar Branding */}
       <header className="max-w-6xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-700/60">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <Layers className="w-6 h-6 text-slate-950 stroke-[2.5]" />
+          <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shadow-md">
+            <Layers className="w-6 h-6 text-white stroke-[2.5]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -314,7 +314,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onLoginSuccess }) => {
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Stop guessing your stock.{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+            <span className="text-emerald-400">
               Verify truth.
             </span>
           </h1>
