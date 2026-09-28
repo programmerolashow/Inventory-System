@@ -403,30 +403,30 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
       {/* Top KPI Cards & Stock Confidence System (Section 14) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* KPI 1: Catalog SKUs */}
-        <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-md">
-          <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
             <span>Catalog SKUs Tracked</span>
-            <Package className="w-4 h-4 text-emerald-400" />
+            <Package className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <div className="text-2xl font-black text-white font-mono tracking-tight">
-            {products.length} <span className="text-xs font-normal text-slate-400">items</span>
+          <div className="text-2xl font-black text-slate-950 dark:text-white font-mono tracking-tight">
+            {products.length} <span className="text-xs font-normal text-slate-500 dark:text-slate-400">items</span>
           </div>
-          <div className="text-[11px] text-slate-400 mt-1">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             Fuzzy alias matched against messy records
           </div>
         </div>
 
         {/* KPI 2: Sellable On-Shelf Stock */}
-        <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-md">
-          <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
             <span>Sellable On-Shelf Stock</span>
-            <CheckCircle2 className="w-4 h-4 text-teal-400" />
+            <CheckCircle2 className="w-4 h-4 text-teal-600 dark:text-teal-400" />
           </div>
-          <div className="text-2xl font-black text-white font-mono tracking-tight">
+          <div className="text-2xl font-black text-slate-950 dark:text-white font-mono tracking-tight">
             {totalSellableUnits.toLocaleString()}{' '}
-            <span className="text-xs font-normal text-slate-400">units</span>
+            <span className="text-xs font-normal text-slate-500 dark:text-slate-400">units</span>
           </div>
-          <div className="text-[11px] text-slate-400 mt-1">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             {totalStockUnits - totalSellableUnits > 0
               ? `${totalStockUnits - totalSellableUnits} reserved/quarantined`
               : '100% available for sale/dispensing'}
@@ -434,15 +434,15 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
         </div>
 
         {/* KPI 3: Capital On Shelf */}
-        <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-md">
-          <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
             <span>Tied Working Capital</span>
-            <span className="font-mono text-xs font-bold text-amber-400">₦ NGN</span>
+            <span className="font-mono text-xs font-bold text-amber-600 dark:text-amber-400">₦ NGN</span>
           </div>
-          <div className="text-2xl font-black text-amber-400 font-mono tracking-tight">
+          <div className="text-2xl font-black text-amber-600 dark:text-amber-400 font-mono tracking-tight">
             ₦{totalInventoryValue.toLocaleString()}
           </div>
-          <div className="text-[11px] text-slate-400 mt-1">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             At landed purchase cost price
           </div>
         </div>
@@ -450,32 +450,32 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
         {/* KPI 4: Stock Confidence Meter (PRD Section 14) */}
         <div
           onClick={() => setShowConfidenceExplainer(!showConfidenceExplainer)}
-          className="p-4 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-emerald-800/40 hover:border-emerald-500/60 shadow-md cursor-pointer transition-all relative group"
+          className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-800/60 hover:border-emerald-500 shadow-sm cursor-pointer transition-colors relative group"
         >
           <div className="flex items-center justify-between text-xs mb-1">
-            <span className="text-slate-300 font-medium">Stock Confidence Score</span>
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span className="text-slate-600 dark:text-slate-300 font-medium">Stock Confidence Score</span>
+            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
 
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-black text-emerald-400 font-mono">
+            <span className="text-2xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
               {storeStockConfidence.score}
-              <span className="text-sm font-normal text-slate-400">/100</span>
+              <span className="text-sm font-normal text-slate-500 dark:text-slate-400">/100</span>
             </span>
             <span
               className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono uppercase tracking-wider ${
                 storeStockConfidence.level === 'verified'
-                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                  : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+                  ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800'
+                  : 'bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 border border-blue-300 dark:border-blue-800'
               }`}
             >
               {storeStockConfidence.level.replace('_', ' ')}
             </span>
           </div>
 
-          <div className="text-[11px] text-emerald-300/80 mt-1 flex items-center justify-between">
+          <div className="text-[11px] text-emerald-700 dark:text-emerald-300/80 mt-1 flex items-center justify-between">
             <span>Rules-based formula (PRD 14)</span>
-            <span className="text-[10px] text-slate-400 group-hover:text-emerald-400 transition-colors">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
               Why this score? ↗
             </span>
           </div>
@@ -484,50 +484,50 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
 
       {/* Stock Confidence Transparency Drawer / Explainer */}
       {showConfidenceExplainer && (
-        <div className="p-5 rounded-2xl bg-slate-900 border border-slate-700 space-y-3 text-xs shadow-xl animate-in fade-in">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+        <div className="p-5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 space-y-3 text-xs shadow-xl animate-in fade-in transition-colors">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <h4 className="font-bold text-white">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <h4 className="font-bold text-slate-950 dark:text-white">
                 Stock Confidence System: Exact Mathematical Weights (Section 14)
               </h4>
             </div>
             <button
               type="button"
               onClick={() => setShowConfidenceExplainer(false)}
-              className="text-slate-400 hover:text-white"
+              className="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
             >
               Close ✕
             </button>
           </div>
 
-          <p className="text-slate-300">
+          <p className="text-slate-600 dark:text-slate-300">
             Unlike opaque machine learning, the PRD requires transparent rules a shop owner or hackathon
             judge can verify in one sentence:
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-center">
-            <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-              <div className="text-slate-400 text-[10px] uppercase font-semibold">1. Recency of Count</div>
-              <div className="text-lg font-bold text-emerald-400 font-mono mt-0.5">40% Weight</div>
+            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+              <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-semibold">1. Recency of Count</div>
+              <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">40% Weight</div>
               <p className="text-[10px] text-slate-500 mt-1">Decays after 7, 14, 30 days without physical verification</p>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-              <div className="text-slate-400 text-[10px] uppercase font-semibold">2. Count Variance</div>
-              <div className="text-lg font-bold text-emerald-400 font-mono mt-0.5">30% Weight</div>
+            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+              <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-semibold">2. Count Variance</div>
+              <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">30% Weight</div>
               <p className="text-[10px] text-slate-500 mt-1">Discrepancy ratio between expected ledger and physical shelf</p>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-              <div className="text-slate-400 text-[10px] uppercase font-semibold">3. Movement Consistency</div>
-              <div className="text-lg font-bold text-emerald-400 font-mono mt-0.5">20% Weight</div>
+            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+              <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-semibold">3. Movement Consistency</div>
+              <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">20% Weight</div>
               <p className="text-[10px] text-slate-500 mt-1">Detects duplicate imports or sudden abnormal negative spikes</p>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-              <div className="text-slate-400 text-[10px] uppercase font-semibold">4. Source Reliability</div>
-              <div className="text-lg font-bold text-emerald-400 font-mono mt-0.5">10% Weight</div>
+            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+              <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-semibold">4. Source Reliability</div>
+              <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">10% Weight</div>
               <p className="text-[10px] text-slate-500 mt-1">Direct count &gt; Clean file upload &gt; Manually typed counter entry</p>
             </div>
           </div>
@@ -535,14 +535,14 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
       )}
 
       {/* Main Tabs Navigation */}
-      <div className="flex items-center overflow-x-auto gap-2 border-b border-slate-800 pb-2 text-xs font-medium no-scrollbar">
+      <div className="flex items-center overflow-x-auto gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-xs font-medium no-scrollbar">
         <button
           type="button"
           onClick={() => setActiveTab('actions')}
-          className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+          className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
             activeTab === 'actions'
               ? 'bg-emerald-600 text-white font-semibold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50'
           }`}
         >
           <Sparkles className="w-3.5 h-3.5" />
@@ -557,10 +557,10 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
         <button
           type="button"
           onClick={() => setActiveTab('inventory')}
-          className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+          className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
             activeTab === 'inventory'
               ? 'bg-emerald-600 text-white font-semibold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50'
           }`}
         >
           <Package className="w-3.5 h-3.5" />
@@ -570,10 +570,10 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
         <button
           type="button"
           onClick={() => setActiveTab('ingestion')}
-          className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+          className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
             activeTab === 'ingestion'
               ? 'bg-emerald-600 text-white font-semibold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50'
           }`}
         >
           <Layers className="w-3.5 h-3.5" />
@@ -583,10 +583,10 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
         <button
           type="button"
           onClick={() => setActiveTab('verification')}
-          className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+          className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
             activeTab === 'verification'
               ? 'bg-emerald-600 text-white font-semibold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50'
           }`}
         >
           <ClipboardCheck className="w-3.5 h-3.5" />
@@ -596,10 +596,10 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
         <button
           type="button"
           onClick={() => setActiveTab('outbound')}
-          className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+          className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
             activeTab === 'outbound'
               ? 'bg-emerald-600 text-white font-semibold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50'
           }`}
         >
           <Receipt className="w-3.5 h-3.5" />
@@ -609,10 +609,10 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
         <button
           type="button"
           onClick={() => setActiveTab('ledger')}
-          className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+          className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
             activeTab === 'ledger'
               ? 'bg-emerald-600 text-white font-semibold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50'
           }`}
         >
           <ShieldCheck className="w-3.5 h-3.5" />
@@ -622,10 +622,10 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
         <button
           type="button"
           onClick={() => setActiveTab('api')}
-          className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+          className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
             activeTab === 'api'
               ? 'bg-emerald-600 text-white font-semibold shadow-sm'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50'
           }`}
         >
           <Code className="w-3.5 h-3.5" />
@@ -636,10 +636,10 @@ export const PrimaryUserDashboard: React.FC<PrimaryUserDashboardProps> = ({
           <button
             type="button"
             onClick={() => setActiveTab('staff')}
-            className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+            className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
               activeTab === 'staff'
                 ? 'bg-emerald-600 text-white font-semibold shadow-sm'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50'
             }`}
           >
             <Users className="w-3.5 h-3.5" />

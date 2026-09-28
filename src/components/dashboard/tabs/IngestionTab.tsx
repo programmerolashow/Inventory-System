@@ -7,9 +7,6 @@ import {
   ArrowRight,
   ShieldAlert,
   Sparkles,
-  RefreshCw,
-  FileText,
-  Layers,
   Info,
 } from 'lucide-react';
 import { ColumnMapping, Product, ProductMatchProposal, User } from '../../../types';
@@ -124,28 +121,28 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
   const handleAnalyzeFile = () => {
     setIsProcessing(true);
     setTimeout(() => {
-      // Deterministic AI proposal based on header semantics
       const proposed: ColumnMapping[] = selectedSample.columns.map((col) => {
         const lower = col.toLowerCase();
+        const sampleRow = selectedSample.rows[0] as Record<string, string>;
         if (lower.includes('desc') || lower.includes('title') || lower.includes('name') || lower.includes('item')) {
-          return { rawHeader: col, mappedField: 'product_name', confidence: 96, sampleValue: selectedSample.rows[0][col as keyof typeof selectedSample.rows[0]] || '' };
+          return { rawHeader: col, mappedField: 'product_name', confidence: 96, sampleValue: sampleRow[col] || '' };
         }
         if (lower.includes('qty') || lower.includes('count') || lower.includes('recv') || lower.includes('amount')) {
-          return { rawHeader: col, mappedField: 'quantity', confidence: 98, sampleValue: selectedSample.rows[0][col as keyof typeof selectedSample.rows[0]] || '' };
+          return { rawHeader: col, mappedField: 'quantity', confidence: 98, sampleValue: sampleRow[col] || '' };
         }
         if (lower.includes('cst') || lower.includes('cost') || lower.includes('rate') || lower.includes('price')) {
-          return { rawHeader: col, mappedField: 'unit_cost', confidence: 94, sampleValue: selectedSample.rows[0][col as keyof typeof selectedSample.rows[0]] || '' };
+          return { rawHeader: col, mappedField: 'unit_cost', confidence: 94, sampleValue: sampleRow[col] || '' };
         }
         if (lower.includes('exp') || lower.includes('date') || lower.includes('before')) {
-          return { rawHeader: col, mappedField: 'expiry_date', confidence: 92, sampleValue: selectedSample.rows[0][col as keyof typeof selectedSample.rows[0]] || '' };
+          return { rawHeader: col, mappedField: 'expiry_date', confidence: 92, sampleValue: sampleRow[col] || '' };
         }
         if (lower.includes('bn') || lower.includes('code') || lower.includes('batch')) {
-          return { rawHeader: col, mappedField: 'batch_number', confidence: 95, sampleValue: selectedSample.rows[0][col as keyof typeof selectedSample.rows[0]] || '' };
+          return { rawHeader: col, mappedField: 'batch_number', confidence: 95, sampleValue: sampleRow[col] || '' };
         }
         if (lower.includes('pack') || lower.includes('sz') || lower.includes('unit')) {
-          return { rawHeader: col, mappedField: 'unit', confidence: 85, sampleValue: selectedSample.rows[0][col as keyof typeof selectedSample.rows[0]] || '' };
+          return { rawHeader: col, mappedField: 'unit', confidence: 85, sampleValue: sampleRow[col] || '' };
         }
-        return { rawHeader: col, mappedField: 'ignore', confidence: 60, sampleValue: selectedSample.rows[0][col as keyof typeof selectedSample.rows[0]] || '' };
+        return { rawHeader: col, mappedField: 'ignore', confidence: 60, sampleValue: sampleRow[col] || '' };
       });
 
       // Generate fuzzy matching proposals demonstrating High-Stakes Dosage Safeguard (Section 13)
@@ -236,58 +233,58 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* PRD Principle Notice */}
-      <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-start gap-3">
-        <Sparkles className="w-5 h-5 text-emerald-400 mt-0.5 shrink-0" />
+      {/* Principle Notice: Clean solid box */}
+      <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+        <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
         <div className="space-y-1 text-xs">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-white">PRD Principle #1: Human-in-the-Loop Over Silent AI</span>
-            <span className="px-2 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px]">
+            <span className="font-bold text-slate-900 dark:text-white">PRD Principle #1: Human-in-the-Loop Over Silent AI</span>
+            <span className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[10px] font-semibold">
               Section 13 & 17
             </span>
           </div>
-          <p className="text-slate-300">
-            AI proposes column mappings and fuzzy product matches; deterministic arithmetic calculates ledger
-            postings. Ambiguous or high-stakes matches (e.g. 500mg vs 250mg) require explicit human approval and are never silently merged.
+          <p className="text-slate-600 dark:text-slate-400">
+            AI proposes column mappings and fuzzy matches; deterministic arithmetic calculates ledger
+            postings. High-stakes matches (e.g. 500mg vs 250mg) require explicit human approval and are never silently merged.
           </p>
         </div>
       </div>
 
       {/* Stage Tracker */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3 text-xs">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 text-xs">
         <div className="flex items-center gap-4">
           <span
             className={`font-semibold flex items-center gap-1.5 ${
-              stage === 'upload' ? 'text-emerald-400' : 'text-slate-400'
+              stage === 'upload' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500'
             }`}
           >
-            <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px]">
+            <span className="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 flex items-center justify-center text-[10px]">
               1
             </span>
             Upload Inbound File
           </span>
 
-          <ArrowRight className="w-3.5 h-3.5 text-slate-600" />
+          <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
 
           <span
             className={`font-semibold flex items-center gap-1.5 ${
-              stage === 'mapping_review' ? 'text-emerald-400' : 'text-slate-400'
+              stage === 'mapping_review' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500'
             }`}
           >
-            <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px]">
+            <span className="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 flex items-center justify-center text-[10px]">
               2
             </span>
             Review AI Column Mapping
           </span>
 
-          <ArrowRight className="w-3.5 h-3.5 text-slate-600" />
+          <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
 
           <span
             className={`font-semibold flex items-center gap-1.5 ${
-              stage === 'matching_review' || stage === 'complete' ? 'text-emerald-400' : 'text-slate-400'
+              stage === 'matching_review' || stage === 'complete' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500'
             }`}
           >
-            <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px]">
+            <span className="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 flex items-center justify-center text-[10px]">
               3
             </span>
             Fuzzy Match & Commit Ledger
@@ -298,21 +295,21 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
       {/* STEP 1: FILE SELECTION / UPLOAD */}
       {stage === 'upload' && (
         <div className="space-y-6">
-          <div className="border-2 border-dashed border-slate-700 hover:border-emerald-500/60 rounded-3xl p-8 text-center bg-slate-900/40 space-y-4 transition-all">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
-              <UploadCloud className="w-8 h-8" />
+          <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-emerald-600 rounded-xl p-8 text-center bg-white dark:bg-slate-900 space-y-4 transition-colors">
+            <div className="w-12 h-12 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center">
+              <UploadCloud className="w-6 h-6" />
             </div>
 
             <div className="space-y-1">
-              <h3 className="font-bold text-sm text-white">Drag & drop delivery waybill or spreadsheet</h3>
-              <p className="text-xs text-slate-400">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white">Drag & drop delivery waybill or spreadsheet</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Supports CSV, XLSX, or raw POS exports with messy, inconsistent column headers
               </p>
             </div>
 
             {/* Quick Demo Pre-load buttons */}
             <div className="pt-2">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+              <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-2">
                 Or select a realistic Nigerian SME test file:
               </span>
 
@@ -322,18 +319,18 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
                     key={sample.name}
                     type="button"
                     onClick={() => setSelectedSample(sample)}
-                    className={`p-3 rounded-xl border text-xs transition-all ${
+                    className={`p-3 rounded-lg border text-xs transition-colors ${
                       selectedSample.name === sample.name
-                        ? 'bg-emerald-950/50 border-emerald-500 text-white shadow-md'
-                        : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                        ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-600 text-slate-900 dark:text-white shadow-sm'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     <div className="flex items-center gap-2 font-semibold mb-1">
-                      <FileSpreadsheet className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span className="truncate">{sample.name}</span>
                     </div>
-                    <p className="text-[10px] text-slate-400 leading-normal">{sample.description}</p>
-                    <div className="mt-2 text-[10px] text-emerald-400 font-mono">
+                    <p className="text-[10px] text-slate-500 leading-normal">{sample.description}</p>
+                    <div className="mt-2 text-[10px] text-emerald-700 dark:text-emerald-400 font-mono">
                       {sample.rows.length} shipment items • {sample.columns.length} raw headers
                     </div>
                   </button>
@@ -346,7 +343,7 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
                 type="button"
                 disabled={!canUpload || isProcessing}
                 onClick={handleAnalyzeFile}
-                className="px-6 py-2.5 rounded-xl font-bold text-xs text-slate-950 bg-emerald-400 hover:bg-emerald-300 shadow-lg shadow-emerald-500/20 inline-flex items-center gap-2 transition-all disabled:opacity-50"
+                className="px-5 py-2.5 rounded-lg font-semibold text-xs text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm inline-flex items-center gap-2 transition-colors disabled:opacity-50"
               >
                 {isProcessing ? (
                   <span>Analyzing Ingestion Semantics...</span>
@@ -362,28 +359,28 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
         </div>
       )}
 
-      {/* STEP 2: REVIEW AI COLUMN MAPPINGS (MANDATORY HUMAN CONFIRMATION) */}
+      {/* STEP 2: REVIEW AI COLUMN MAPPINGS */}
       {stage === 'mapping_review' && (
         <div className="space-y-5">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-white">Review Proposed Column Mappings</h3>
-              <p className="text-xs text-slate-400">
-                Confirm how headers in <strong className="text-white">{selectedSample.name}</strong> map to canonical fields.
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">Review Proposed Column Mappings</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Confirm how headers in <strong className="text-slate-900 dark:text-white">{selectedSample.name}</strong> map to canonical fields.
               </p>
             </div>
             <button
               type="button"
               onClick={() => setStage('upload')}
-              className="text-xs text-slate-400 hover:text-slate-200 underline"
+              className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 underline"
             >
               Choose different file
             </button>
           </div>
 
-          <div className="rounded-2xl border border-slate-800 overflow-hidden bg-slate-900/60">
+          <div className="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-white dark:bg-slate-900 shadow-sm">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 uppercase text-[10px] font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-2.5 px-3">Raw File Header</th>
                   <th className="py-2.5 px-3">Sample Value</th>
@@ -391,13 +388,13 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
                   <th className="py-2.5 px-3 text-right">AI Confidence</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800 text-slate-300">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                 {mappings.map((m, idx) => (
-                  <tr key={idx} className="hover:bg-slate-800/40">
-                    <td className="py-2.5 px-3 font-mono text-emerald-400 font-medium">
+                  <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-850">
+                    <td className="py-2.5 px-3 font-mono text-emerald-700 dark:text-emerald-400 font-medium">
                       {m.rawHeader}
                     </td>
-                    <td className="py-2.5 px-3 text-slate-300 max-w-[140px] truncate">
+                    <td className="py-2.5 px-3 text-slate-600 dark:text-slate-400 max-w-[140px] truncate">
                       {m.sampleValue || '—'}
                     </td>
                     <td className="py-2.5 px-3">
@@ -408,7 +405,7 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
                           updated[idx].mappedField = e.target.value as any;
                           setMappings(updated);
                         }}
-                        className="bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                        className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-1 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-emerald-600"
                       >
                         <option value="product_name">Product Name / Title</option>
                         <option value="quantity">Quantity</option>
@@ -420,7 +417,7 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
                       </select>
                     </td>
                     <td className="py-2.5 px-3 text-right">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                         {m.confidence}%
                       </span>
                     </td>
@@ -431,16 +428,16 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
           </div>
 
           <div className="flex items-center justify-between pt-2">
-            <div className="text-xs text-slate-400 flex items-center gap-1.5">
-              <Info className="w-4 h-4 text-emerald-400" />
-              <span>No data has been posted to the ledger yet. Confirmation is mandatory.</span>
+            <div className="text-xs text-slate-500 flex items-center gap-1.5">
+              <Info className="w-4 h-4 text-emerald-600" />
+              <span>No data has been posted to the ledger yet. Human confirmation is mandatory.</span>
             </div>
 
             <button
               type="button"
               disabled={!canConfirm}
               onClick={() => setStage('matching_review')}
-              className="px-5 py-2 rounded-xl font-bold text-xs text-slate-950 bg-emerald-400 hover:bg-emerald-300 shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all"
+              className="px-4 py-2 rounded-lg font-semibold text-xs text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm flex items-center gap-2 transition-colors"
             >
               <span>Confirm Mappings & Proceed to Catalog Match</span>
               <ArrowRight className="w-4 h-4" />
@@ -449,18 +446,18 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
         </div>
       )}
 
-      {/* STEP 3: FUZZY CATALOG MATCHING & HIGH-STAKES SAFEGUARD */}
+      {/* STEP 3: FUZZY CATALOG MATCHING */}
       {stage === 'matching_review' && (
         <div className="space-y-5">
-          <div className="p-4 rounded-2xl bg-amber-950/30 border border-amber-800/40 flex items-start gap-3">
-            <ShieldAlert className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" />
+          <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 flex items-start gap-3">
+            <ShieldAlert className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 shrink-0" />
             <div className="text-xs space-y-1">
-              <div className="font-bold text-amber-300">
+              <div className="font-bold text-amber-900 dark:text-amber-300">
                 PRD High-Stakes Matching Rule Active (Section 13 & 17)
               </div>
-              <p className="text-slate-300">
+              <p className="text-amber-800 dark:text-slate-300">
                 Products with different strengths (e.g. 500mg vs 250mg) or different dosage forms are NEVER
-                auto-merged. This system is authoritative over <strong className="text-white">quantity</strong>,
+                auto-merged. This system is authoritative over <strong className="text-slate-900 dark:text-white">quantity</strong>,
                 never clinical equivalence.
               </p>
             </div>
@@ -470,31 +467,29 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
             {matchProposals.map((proposal, idx) => (
               <div
                 key={idx}
-                className={`p-3.5 rounded-xl border text-xs transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+                className={`p-3.5 rounded-lg border text-xs transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
                   proposal.isHighStakesDosageMismatch
-                    ? 'bg-red-950/40 border-red-800/80 shadow-inner'
-                    : proposal.action === 'auto_merge'
-                    ? 'bg-slate-900 border-slate-800'
-                    : 'bg-slate-950 border-slate-800'
+                    ? 'bg-red-50 dark:bg-red-950/40 border-red-300 dark:border-red-900'
+                    : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800'
                 }`}
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-white">{proposal.rawName}</span>
+                    <span className="font-semibold text-slate-900 dark:text-white">{proposal.rawName}</span>
                     {proposal.isHighStakesDosageMismatch && (
-                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-500/20 text-red-300 border border-red-500/40 uppercase">
+                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 border border-red-300 dark:border-red-800 uppercase">
                         Manual Confirmation Required
                       </span>
                     )}
                   </div>
-                  <div className="text-[11px] text-slate-400">
-                    Matches: <strong className="text-emerald-400">{proposal.suggestedProductName}</strong>
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Matches: <strong className="text-emerald-700 dark:text-emerald-400">{proposal.suggestedProductName}</strong>
                   </div>
-                  <p className="text-[10px] text-slate-400 font-mono mt-0.5">{proposal.notes}</p>
+                  <p className="text-[10px] text-slate-500 font-mono mt-0.5">{proposal.notes}</p>
                 </div>
 
                 <div className="flex items-center gap-2 self-end sm:self-center">
-                  <span className="text-[11px] font-mono text-slate-400">
+                  <span className="text-[11px] font-mono text-slate-500">
                     Confidence: {proposal.confidence}%
                   </span>
                   <button
@@ -505,7 +500,7 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
                       updated[idx].isHighStakesDosageMismatch = false;
                       setMatchProposals(updated);
                     }}
-                    className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-950 border border-emerald-700 text-emerald-300 hover:bg-emerald-900/60"
+                    className="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 dark:bg-emerald-950 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-200"
                   >
                     Accept as New SKU
                   </button>
@@ -514,11 +509,11 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
             ))}
           </div>
 
-          <div className="flex items-center justify-between pt-3 border-t border-slate-800">
+          <div className="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-800">
             <button
               type="button"
               onClick={() => setStage('mapping_review')}
-              className="text-xs text-slate-400 hover:text-slate-200"
+              className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-slate-200"
             >
               Back to Column Mappings
             </button>
@@ -527,7 +522,7 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
               type="button"
               disabled={isProcessing}
               onClick={handleCommitShipment}
-              className="px-6 py-2.5 rounded-xl font-bold text-xs text-slate-950 bg-emerald-400 hover:bg-emerald-300 shadow-lg shadow-emerald-500/20 flex items-center gap-2 transition-all"
+              className="px-5 py-2.5 rounded-lg font-bold text-xs text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm flex items-center gap-2 transition-colors"
             >
               {isProcessing ? 'Posting RECEIVE Events...' : 'Commit Inbound Delivery to Ledger'}
             </button>
@@ -537,15 +532,15 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
 
       {/* STEP 4: COMPLETE CONFIRMATION */}
       {stage === 'complete' && (
-        <div className="p-8 text-center rounded-2xl bg-slate-900/70 border border-emerald-800/40 space-y-4">
-          <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center">
+        <div className="p-8 text-center rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
+          <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center">
             <CheckCircle2 className="w-6 h-6" />
           </div>
 
           <div className="space-y-1">
-            <h3 className="text-sm font-bold text-white">Inbound Delivery Committed to Ledger</h3>
-            <p className="text-xs text-slate-300 max-w-md mx-auto">
-              All items successfully created immutable <code className="text-emerald-400 font-mono">RECEIVE</code> events.
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Inbound Delivery Committed to Ledger</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400 max-w-md mx-auto">
+              All items successfully created immutable <code className="text-emerald-700 dark:text-emerald-400 font-mono">RECEIVE</code> events.
               Stock levels, batch expiry dates, and Stock Confidence scores have been updated deterministically.
             </p>
           </div>
@@ -554,7 +549,7 @@ export const IngestionTab: React.FC<IngestionTabProps> = ({
             <button
               type="button"
               onClick={() => setStage('upload')}
-              className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-colors"
+              className="px-4 py-2 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white transition-colors"
             >
               Ingest Another Shipment File
             </button>

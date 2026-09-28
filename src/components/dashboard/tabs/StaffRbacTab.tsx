@@ -63,13 +63,13 @@ export const StaffRbacTab: React.FC<StaffRbacTabProps> = ({
   return (
     <div className="space-y-6">
       {/* RBAC Header */}
-      <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-colors shadow-sm">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <Users className="w-5 h-5 text-emerald-400" />
-            <h3 className="font-bold text-sm text-white">Staff Team & Role-Based Access Control</h3>
+            <Users className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <h3 className="font-bold text-sm text-slate-950 dark:text-white">Staff Team & Role-Based Access Control</h3>
           </div>
-          <p className="text-xs text-slate-300">
+          <p className="text-xs text-slate-600 dark:text-slate-400">
             Control granular privileges for Store Managers, Cashiers/Attendants, and External Auditors.
           </p>
         </div>
@@ -124,12 +124,12 @@ export const StaffRbacTab: React.FC<StaffRbacTabProps> = ({
 
       {/* Staff Directory Table */}
       <div className="space-y-3">
-        <h4 className="font-bold text-xs uppercase tracking-wider text-slate-400">
+        <h4 className="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">
           Active Team Members ({businessStaff.length})
         </h4>
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-lg">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm transition-colors">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-950 text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-800">
+            <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-4">Member Name</th>
                 <th className="py-3 px-3">Role</th>
@@ -138,11 +138,11 @@ export const StaffRbacTab: React.FC<StaffRbacTabProps> = ({
                 <th className="py-3 px-3">Last Active</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/80 text-slate-300">
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
               {businessStaff.map((u) => {
                 const info = ROLE_INFO[u.role];
                 return (
-                  <tr key={u.id} className="hover:bg-slate-800/30">
+                  <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
                     <td className="py-3 px-4">
                       <div className="font-semibold text-white">{u.name}</div>
                       <div className="text-[10px] text-slate-400">{u.email}</div>
@@ -179,17 +179,17 @@ export const StaffRbacTab: React.FC<StaffRbacTabProps> = ({
 
       {/* Invite Modal */}
       {showInviteModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
           <form
             onSubmit={handleInviteSubmit}
-            className="max-w-md w-full bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4 shadow-2xl"
+            className="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4 shadow-xl text-slate-900 dark:text-white"
           >
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="font-bold text-sm text-white">Invite New Staff Member</h3>
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+              <h3 className="font-bold text-sm text-slate-950 dark:text-white">Invite New Staff Member</h3>
               <button
                 type="button"
                 onClick={() => setShowInviteModal(false)}
-                className="text-xs text-slate-400 hover:text-white"
+                className="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-white"
               >
                 ✕
               </button>
@@ -255,17 +255,17 @@ export const StaffRbacTab: React.FC<StaffRbacTabProps> = ({
 
       {/* Add Store Modal */}
       {showStoreModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
           <form
             onSubmit={handleStoreSubmit}
-            className="max-w-md w-full bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4 shadow-2xl"
+            className="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4 shadow-xl text-slate-900 dark:text-white"
           >
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="font-bold text-sm text-white">Add Store / Outlet Branch</h3>
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+              <h3 className="font-bold text-sm text-slate-950 dark:text-white">Add Store / Outlet Branch</h3>
               <button
                 type="button"
                 onClick={() => setShowStoreModal(false)}
-                className="text-xs text-slate-400 hover:text-white"
+                className="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-white"
               >
                 ✕
               </button>

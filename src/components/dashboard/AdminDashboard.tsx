@@ -128,94 +128,94 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="p-5 rounded-2xl bg-gradient-to-r from-purple-950/60 via-slate-900 to-slate-900 border border-purple-800/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="p-5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-colors">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-purple-500/20 text-purple-300">
+            <span className="p-1.5 rounded-lg bg-purple-100 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300">
               <Shield className="w-5 h-5" />
             </span>
-            <h2 className="text-base font-bold text-white tracking-tight">
+            <h2 className="text-base font-bold text-slate-950 dark:text-white tracking-tight">
               Platform Administration Console (Superadmin & RBAC Governance)
             </h2>
-            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20 font-mono">
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 dark:bg-purple-950/80 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-800 font-mono">
               ELEVATED PRIVILEGES
             </span>
           </div>
-          <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+          <p className="text-xs text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
             Multi-tenant oversight across all registered Nigerian SME businesses, cryptographic session
             audits, granular permission enforcement, and external API Gateway traffic monitoring.
           </p>
         </div>
 
         <div className="flex items-center gap-2 self-end md:self-center">
-          <span className="text-xs text-slate-400 font-mono">
-            Signed in: <strong className="text-purple-300">{currentUser.email}</strong>
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
+            Signed in: <strong className="text-purple-700 dark:text-purple-300">{currentUser.email}</strong>
           </span>
         </div>
       </div>
 
       {/* Admin KPI Ribbon */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-md">
-          <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
             <span>Registered Businesses</span>
-            <Building className="w-4 h-4 text-purple-400" />
+            <Building className="w-4 h-4 text-purple-600 dark:text-purple-400" />
           </div>
-          <div className="text-2xl font-black text-white font-mono">
+          <div className="text-2xl font-black text-slate-950 dark:text-white font-mono">
             {businesses.length}{' '}
-            <span className="text-xs font-normal text-slate-400">({totalStores} stores)</span>
+            <span className="text-xs font-normal text-slate-500 dark:text-slate-400">({totalStores} stores)</span>
           </div>
-          <div className="text-[11px] text-slate-400 mt-1">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             Pharmacies, Supermarkets & Retailers
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-md">
-          <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
             <span>Active Users & Sessions</span>
-            <Users className="w-4 h-4 text-emerald-400" />
+            <Users className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <div className="text-2xl font-black text-white font-mono">
+          <div className="text-2xl font-black text-slate-950 dark:text-white font-mono">
             {activeUsersCount}{' '}
-            <span className="text-xs font-normal text-slate-400">/ {allUsers.length}</span>
+            <span className="text-xs font-normal text-slate-500 dark:text-slate-400">/ {allUsers.length}</span>
           </div>
-          <div className="text-[11px] text-slate-400 mt-1">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             Protected by role-based permissions
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-md">
-          <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
             <span>Opted-In API Tenants</span>
-            <Zap className="w-4 h-4 text-amber-400" />
+            <Zap className="w-4 h-4 text-amber-600 dark:text-amber-400" />
           </div>
-          <div className="text-2xl font-black text-amber-400 font-mono">
+          <div className="text-2xl font-black text-amber-600 dark:text-amber-400 font-mono">
             {optedInCount}{' '}
-            <span className="text-xs font-normal text-slate-400">
+            <span className="text-xs font-normal text-slate-500 dark:text-slate-400">
               ({Math.round((optedInCount / (businesses.length || 1)) * 100)}%)
             </span>
           </div>
-          <div className="text-[11px] text-slate-400 mt-1">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             Broadcasting availability to MediSwitch
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 shadow-md">
-          <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
+        <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1">
             <span>Platform Security Health</span>
-            <Activity className="w-4 h-4 text-emerald-400" />
+            <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <div className="text-2xl font-black text-emerald-400 font-mono">
-            100% <span className="text-xs font-normal text-slate-400">Zero Gaps</span>
+          <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
+            100% <span className="text-xs font-normal text-slate-500 dark:text-slate-400">Zero Gaps</span>
           </div>
-          <div className="text-[11px] text-slate-400 mt-1">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
             Immutable ledger invariants verified
           </div>
         </div>
       </div>
 
       {/* Admin Tabs Navigation */}
-      <div className="flex items-center overflow-x-auto gap-2 border-b border-slate-800 pb-2 text-xs font-medium no-scrollbar">
+      <div className="flex items-center overflow-x-auto gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 text-xs font-medium no-scrollbar">
         {[
           { id: 'overview', label: 'Platform Overview', icon: Activity },
           { id: 'tenants', label: 'Tenant Businesses', icon: Building },
@@ -230,10 +230,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               key={tab.id}
               type="button"
               onClick={() => setAdminTab(tab.id as any)}
-              className={`px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all whitespace-nowrap ${
+              className={`px-3 py-2 rounded-lg flex items-center gap-1.5 transition-colors whitespace-nowrap ${
                 adminTab === tab.id
-                  ? 'bg-purple-600 text-white font-semibold shadow-sm'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                  ? 'bg-slate-900 dark:bg-purple-700 text-white font-semibold shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -248,30 +248,30 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Recent Audit Feed */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 transition-colors shadow-sm">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-xs uppercase tracking-wider text-white">
+                <h4 className="font-bold text-xs uppercase tracking-wider text-slate-950 dark:text-white">
                   Real-Time Platform Security Activity
                 </h4>
-                <span className="text-[10px] text-emerald-400 font-mono">LIVE FEED</span>
+                <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono font-semibold">LIVE FEED</span>
               </div>
 
               <div className="space-y-2 max-h-80 overflow-y-auto pr-1 text-xs">
                 {auditLogs.slice(0, 5).map((log) => (
                   <div
                     key={log.id}
-                    className="p-3 rounded-xl bg-slate-950 border border-slate-800/80 space-y-1"
+                    className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 space-y-1"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-white">{log.action}</span>
+                      <span className="font-semibold text-slate-900 dark:text-white">{log.action}</span>
                       <span className="text-[10px] text-slate-500 font-mono">
                         {new Date(log.timestamp).toLocaleTimeString()}
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-300">{log.details}</p>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-300">{log.details}</p>
                     <div className="text-[10px] text-slate-500 flex items-center justify-between pt-1">
                       <span>Actor: {log.actorName} ({log.actorRole})</span>
-                      <span className="font-mono text-purple-400">{log.ipAddress}</span>
+                      <span className="font-mono text-purple-600 dark:text-purple-400">{log.ipAddress}</span>
                     </div>
                   </div>
                 ))}
@@ -279,41 +279,41 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
 
             {/* Consuming Partner Gateway Stats */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 flex flex-col justify-between transition-colors shadow-sm">
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-bold text-xs uppercase tracking-wider text-white">
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-slate-950 dark:text-white">
                     External API Gateway Summary (MediSwitch)
                   </h4>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                     STATUS: HEALTHY
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  External applications query <code className="text-purple-300 font-mono">/api/v1/availability</code>{' '}
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  External applications query <code className="text-purple-600 dark:text-purple-300 font-mono">/api/v1/availability</code>{' '}
                   to retrieve verified sellable stock and confidence levels without manual owner calls.
                 </p>
 
                 <div className="grid grid-cols-3 gap-2 mt-4 text-center text-xs">
-                  <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                    <div className="text-[10px] uppercase text-slate-400">Total API Queries</div>
-                    <div className="text-base font-bold text-white font-mono mt-0.5">
+                  <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                    <div className="text-[10px] uppercase text-slate-500">Total API Queries</div>
+                    <div className="text-base font-bold text-slate-900 dark:text-white font-mono mt-0.5">
                       {apiQueryLogs.length} reqs
                     </div>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                    <div className="text-[10px] uppercase text-slate-400">Avg Latency</div>
-                    <div className="text-base font-bold text-emerald-400 font-mono mt-0.5">38ms</div>
+                  <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                    <div className="text-[10px] uppercase text-slate-500">Avg Latency</div>
+                    <div className="text-base font-bold text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">38ms</div>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
-                    <div className="text-[10px] uppercase text-slate-400">Success Rate</div>
-                    <div className="text-base font-bold text-teal-400 font-mono mt-0.5">99.4%</div>
+                  <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+                    <div className="text-[10px] uppercase text-slate-500">Success Rate</div>
+                    <div className="text-base font-bold text-teal-600 dark:text-teal-400 font-mono mt-0.5">99.4%</div>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
                 Rule verified: 0% confidential cost/margin data transmitted externally.
               </div>
             </div>
@@ -325,8 +325,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {adminTab === 'tenants' && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-white">Registered Business Tenants</h3>
-            <span className="text-xs text-slate-400">{businesses.length} total active enterprises</span>
+            <h3 className="text-sm font-bold text-slate-950 dark:text-white">Registered Business Tenants</h3>
+            <span className="text-xs text-slate-500 dark:text-slate-400">{businesses.length} total active enterprises</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -337,7 +337,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               return (
                 <div
                   key={biz.id}
-                  className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-lg flex flex-col justify-between"
+                  className="p-5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm flex flex-col justify-between transition-colors"
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
@@ -394,15 +394,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 value={userSearchTerm}
                 onChange={(e) => setUserSearchTerm(e.target.value)}
                 placeholder="Search by name, email, or role..."
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg pl-9 pr-4 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-purple-500"
               />
             </div>
-            <span className="text-xs text-slate-400">{filteredUsers.length} users registered</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">{filteredUsers.length} users registered</span>
           </div>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-lg">
+          <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm transition-colors">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">User & Email</th>
                   <th className="py-3 px-3">Role & Category</th>
@@ -412,16 +412,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <th className="py-3 px-4 text-right">RBAC Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/80 text-slate-300">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                 {filteredUsers.map((u) => {
                   const info = ROLE_INFO[u.role];
                   const isCurrent = u.id === currentUser.id;
 
                   return (
-                    <tr key={u.id} className="hover:bg-slate-800/30">
+                    <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
                       <td className="py-3 px-4">
-                        <div className="font-semibold text-white">{u.name}</div>
-                        <div className="text-[10px] text-slate-400">{u.email}</div>
+                        <div className="font-semibold text-slate-900 dark:text-white">{u.name}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">{u.email}</div>
                       </td>
 
                       <td className="py-3 px-3">
@@ -490,17 +490,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
           {/* Edit Role Modal */}
           {selectedUserForEdit && (
-            <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-              <div className="max-w-md w-full bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4 shadow-2xl">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+              <div className="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4 shadow-xl text-slate-900 dark:text-white">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
                   <div>
-                    <h3 className="font-bold text-sm text-white">Elevate / Modify User Role</h3>
-                    <div className="text-xs text-slate-400">{selectedUserForEdit.email}</div>
+                    <h3 className="font-bold text-sm text-slate-950 dark:text-white">Elevate / Modify User Role</h3>
+                    <div className="text-xs text-slate-500 dark:text-slate-400">{selectedUserForEdit.email}</div>
                   </div>
                   <button
                     type="button"
                     onClick={() => setSelectedUserForEdit(null)}
-                    className="text-xs text-slate-400 hover:text-white"
+                    className="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-white"
                   >
                     ✕
                   </button>
@@ -559,9 +559,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-lg">
+          <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm transition-colors">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">Timestamp & ID</th>
                   <th className="py-3 px-3">Actor & Role</th>
@@ -571,30 +571,30 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <th className="py-3 px-3 text-right">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/80 text-slate-300">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                 {filteredLogs.map((log) => (
-                  <tr key={log.id} className="hover:bg-slate-800/30">
+                  <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
                     <td className="py-3 px-4">
-                      <div className="font-mono text-purple-300 font-semibold">{log.id}</div>
+                      <div className="font-mono text-purple-600 dark:text-purple-300 font-semibold">{log.id}</div>
                       <div className="text-[10px] text-slate-500 font-mono">
                         {new Date(log.timestamp).toLocaleString()}
                       </div>
                     </td>
 
                     <td className="py-3 px-3">
-                      <div className="font-semibold text-white">{log.actorName}</div>
-                      <div className="text-[10px] text-slate-400 capitalize">{log.actorRole}</div>
+                      <div className="font-semibold text-slate-900 dark:text-white">{log.actorName}</div>
+                      <div className="text-[10px] text-slate-500 capitalize">{log.actorRole}</div>
                     </td>
 
-                    <td className="py-3 px-3 font-mono font-bold text-slate-200">
+                    <td className="py-3 px-3 font-mono font-bold text-slate-800 dark:text-slate-200">
                       {log.action}
                     </td>
 
-                    <td className="py-3 px-4 text-slate-300 max-w-sm">
+                    <td className="py-3 px-4 text-slate-600 dark:text-slate-300 max-w-sm">
                       {log.details}
                     </td>
 
-                    <td className="py-3 px-3 text-slate-400 font-mono text-[10px]">
+                    <td className="py-3 px-3 text-slate-500 dark:text-slate-400 font-mono text-[10px]">
                       {log.ipAddress}
                     </td>
 
@@ -602,10 +602,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <span
                         className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase font-mono ${
                           log.status === 'success'
-                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                            ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800'
                             : log.status === 'warning'
-                            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-                            : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                            ? 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-400 border border-amber-300 dark:border-amber-800'
+                            : 'bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-400 border border-red-300 dark:border-red-800'
                         }`}
                       >
                         {log.status}
@@ -623,13 +623,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {adminTab === 'api_gateway' && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-white">External Partner Query Traffic (MediSwitch)</h3>
-            <span className="text-xs text-slate-400">All queries rate-limited & logged</span>
+            <h3 className="text-sm font-bold text-slate-950 dark:text-white">External Partner Query Traffic (MediSwitch)</h3>
+            <span className="text-xs text-slate-500 dark:text-slate-400">All queries rate-limited & logged</span>
           </div>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-lg">
+          <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm transition-colors">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-3 px-4">Timestamp</th>
                   <th className="py-3 px-3">Partner Client</th>
@@ -639,9 +639,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <th className="py-3 px-4">Response Signal</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/80 text-slate-300">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                 {apiQueryLogs.map((q) => (
-                  <tr key={q.id} className="hover:bg-slate-800/30">
+                  <tr key={q.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
                     <td className="py-3 px-4 font-mono text-[10px] text-slate-400">
                       {new Date(q.timestamp).toLocaleTimeString()}
                     </td>
@@ -676,61 +676,61 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* TAB 6: CONFIGURATION & WEIGHTS */}
       {adminTab === 'system_config' && (
         <div className="space-y-6 max-w-3xl">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4 shadow-lg">
-            <h4 className="font-bold text-sm text-white">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4 shadow-sm transition-colors">
+            <h4 className="font-bold text-sm text-slate-950 dark:text-white">
               Stock Confidence Formula Weighting (Section 14 Governance)
             </h4>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Deterministic scoring formula applied to all tenant stores.
             </p>
 
             <div className="space-y-3 text-xs">
               <div className="space-y-1">
-                <div className="flex items-center justify-between text-slate-300">
+                <div className="flex items-center justify-between text-slate-700 dark:text-slate-300">
                   <span>Recency of Physical Verification (Weight: 40%)</span>
-                  <span className="font-mono text-emerald-400 font-bold">40 pts</span>
+                  <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">40 pts</span>
                 </div>
-                <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden">
-                  <div className="bg-emerald-500 h-full w-[40%]" />
+                <div className="w-full bg-slate-100 dark:bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
+                  <div className="bg-emerald-600 h-full w-[40%]" />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="flex items-center justify-between text-slate-300">
+                <div className="flex items-center justify-between text-slate-700 dark:text-slate-300">
                   <span>Variance between expected & last count (Weight: 30%)</span>
-                  <span className="font-mono text-teal-400 font-bold">30 pts</span>
+                  <span className="font-mono text-teal-600 dark:text-teal-400 font-bold">30 pts</span>
                 </div>
-                <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden">
-                  <div className="bg-teal-500 h-full w-[30%]" />
+                <div className="w-full bg-slate-100 dark:bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
+                  <div className="bg-teal-600 h-full w-[30%]" />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="flex items-center justify-between text-slate-300">
+                <div className="flex items-center justify-between text-slate-700 dark:text-slate-300">
                   <span>Consistency of recent movement logs (Weight: 20%)</span>
-                  <span className="font-mono text-cyan-400 font-bold">20 pts</span>
+                  <span className="font-mono text-cyan-600 dark:text-cyan-400 font-bold">20 pts</span>
                 </div>
-                <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden">
-                  <div className="bg-cyan-500 h-full w-[20%]" />
+                <div className="w-full bg-slate-100 dark:bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
+                  <div className="bg-cyan-600 h-full w-[20%]" />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="flex items-center justify-between text-slate-300">
+                <div className="flex items-center justify-between text-slate-700 dark:text-slate-300">
                   <span>Source reliability score (Weight: 10%)</span>
-                  <span className="font-mono text-purple-400 font-bold">10 pts</span>
+                  <span className="font-mono text-purple-600 dark:text-purple-400 font-bold">10 pts</span>
                 </div>
-                <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden">
-                  <div className="bg-purple-500 h-full w-[10%]" />
+                <div className="w-full bg-slate-100 dark:bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
+                  <div className="bg-purple-600 h-full w-[10%]" />
                 </div>
               </div>
             </div>
           </div>
 
           {/* Reset / Demo Data Sync */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-3">
-            <h4 className="font-bold text-sm text-white">Platform Data Synchronization</h4>
-            <p className="text-xs text-slate-400">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-3 shadow-sm transition-colors">
+            <h4 className="font-bold text-sm text-slate-950 dark:text-white">Platform Data Synchronization</h4>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Restore initial seed data including Nigerian pharmacy (MedixCare), supermarket (PrimeMart), and platform superadmin accounts.
             </p>
             <button
@@ -739,7 +739,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 StorageService.resetAllData();
                 onDataMutated();
               }}
-              className="px-4 py-2 rounded-xl text-xs font-semibold bg-red-950/50 hover:bg-red-900/60 border border-red-800/80 text-red-200 transition-colors inline-flex items-center gap-1.5"
+              className="px-4 py-2 rounded-lg text-xs font-semibold bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/60 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-300 transition-colors inline-flex items-center gap-1.5"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               Reset All Platform Data to Initial Seed

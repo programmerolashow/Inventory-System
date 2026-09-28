@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   ClipboardCheck,
-  AlertOctagon,
   CheckCircle2,
   AlertTriangle,
   ArrowRight,
@@ -33,11 +32,8 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
   targetProductId,
 }) => {
   const [activeSession, setActiveSession] = useState<VerificationSession | null>(() => {
-    // If targetProductId passed, initiate count for that item
     const target = products.find((p) => p.id === targetProductId);
-    const initialItems = target
-      ? [target]
-      : products.slice(0, 4); // prioritize top items
+    const initialItems = target ? [target] : products.slice(0, 4);
 
     const lines: VerificationLine[] = initialItems.map((p) => ({
       id: `vline_${Date.now()}_${p.id}`,
@@ -45,7 +41,7 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
       productName: p.canonicalName,
       sku: p.sku,
       expectedQty: p.currentStock,
-      countedQty: p.currentStock, // starts at expected for ease
+      countedQty: p.currentStock,
       variance: 0,
       unitCost: p.costPrice,
       varianceValue: 0,
@@ -126,54 +122,54 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Educational Banner */}
-      <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-950/40 via-slate-900 to-slate-900 border border-blue-800/40 flex items-start gap-3">
-        <ClipboardCheck className="w-5 h-5 text-blue-400 mt-0.5 shrink-0" />
+      {/* Banner: Solid color, no gradient */}
+      <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start gap-3">
+        <ClipboardCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
         <div className="space-y-1 text-xs">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-white">Physical Verification & Variance Investigation</span>
-            <span className="px-2 py-0.2 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[10px]">
+            <span className="font-bold text-slate-900 dark:text-white">Physical Verification & Variance Investigation</span>
+            <span className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[10px] font-semibold">
               PRD Section 12.6 & 15
             </span>
           </div>
-          <p className="text-slate-300">
+          <p className="text-slate-600 dark:text-slate-400">
             Rather than waiting for silent shrinkage, weekly counts prompt staff on prioritized items. When
-            variances occur, managers must assign a ranked cause before the adjustment posts to the immutable ledger.
+            variances occur, managers select a ranked cause before an approved adjustment posts to the immutable ledger.
           </p>
         </div>
       </div>
 
       {/* Active Count Session */}
       {activeSession && activeSession.status === 'in_progress' ? (
-        <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6 space-y-5 shadow-xl">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-5 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-base text-white">Active Stock Count Session</h3>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase">
+                <h3 className="font-bold text-base text-slate-900 dark:text-white">Active Stock Count Session</h3>
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 uppercase">
                   In Progress
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Conducted by <strong className="text-slate-200">{activeSession.startedByName}</strong> ({currentUser.role})
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Conducted by <strong className="text-slate-800 dark:text-slate-200">{activeSession.startedByName}</strong> ({currentUser.role})
               </p>
             </div>
 
             {/* Quick Net Variance Summary */}
             <div className="flex items-center gap-4 text-xs font-mono">
               <div className="text-right">
-                <span className="text-[10px] text-slate-400 uppercase font-semibold block">Total Expected</span>
-                <span className="font-bold text-white">{activeSession.totalExpectedUnits} units</span>
+                <span className="text-[10px] text-slate-500 uppercase font-semibold block">Total Expected</span>
+                <span className="font-bold text-slate-900 dark:text-white">{activeSession.totalExpectedUnits} units</span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] text-slate-400 uppercase font-semibold block">Net Variance</span>
+                <span className="text-[10px] text-slate-500 uppercase font-semibold block">Net Variance</span>
                 <span
                   className={`font-bold ${
                     activeSession.netVarianceUnits < 0
-                      ? 'text-red-400'
+                      ? 'text-red-600 dark:text-red-400'
                       : activeSession.netVarianceUnits > 0
-                      ? 'text-emerald-400'
-                      : 'text-slate-300'
+                      ? 'text-emerald-600 dark:text-emerald-400'
+                      : 'text-slate-500'
                   }`}
                 >
                   {activeSession.netVarianceUnits > 0
@@ -183,10 +179,10 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] text-slate-400 uppercase font-semibold block">Discrepancy ₦</span>
+                <span className="text-[10px] text-slate-500 uppercase font-semibold block">Discrepancy ₦</span>
                 <span
                   className={`font-bold ${
-                    activeSession.netVarianceValue < 0 ? 'text-red-400' : 'text-slate-300'
+                    activeSession.netVarianceValue < 0 ? 'text-red-600 dark:text-red-400' : 'text-slate-500'
                   }`}
                 >
                   ₦{Math.abs(activeSession.netVarianceValue).toLocaleString()}
@@ -196,9 +192,9 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
           </div>
 
           {/* Verification Lines Table */}
-          <div className="rounded-xl border border-slate-800 overflow-hidden bg-slate-950/60">
+          <div className="rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden bg-slate-50 dark:bg-slate-950">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950 text-slate-400 uppercase text-[10px] font-semibold border-b border-slate-800">
+              <thead className="bg-slate-100 dark:bg-slate-900 text-slate-500 uppercase text-[10px] font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-2.5 px-3">Product Name & SKU</th>
                   <th className="py-2.5 px-3 text-right">Expected Stock</th>
@@ -207,21 +203,21 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
                   <th className="py-2.5 px-3">Ranked Likely Cause (PRD 12.6)</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/80 text-slate-300">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                 {activeSession.lines.map((line) => {
                   const hasDiscrepancy = line.variance !== 0;
 
                   return (
                     <tr
                       key={line.id}
-                      className={hasDiscrepancy ? 'bg-amber-950/10' : 'hover:bg-slate-800/30'}
+                      className={hasDiscrepancy ? 'bg-amber-50/50 dark:bg-amber-950/20' : 'hover:bg-white dark:hover:bg-slate-900'}
                     >
                       <td className="py-3 px-3">
-                        <div className="font-semibold text-white">{line.productName}</div>
-                        <div className="text-[10px] font-mono text-emerald-400">{line.sku}</div>
+                        <div className="font-semibold text-slate-900 dark:text-white">{line.productName}</div>
+                        <div className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 font-semibold">{line.sku}</div>
                       </td>
 
-                      <td className="py-3 px-3 text-right font-mono font-medium text-slate-200">
+                      <td className="py-3 px-3 text-right font-mono font-medium text-slate-900 dark:text-slate-200">
                         {line.expectedQty} units
                       </td>
 
@@ -232,7 +228,7 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
                           value={line.countedQty}
                           disabled={!canCount}
                           onChange={(e) => updateCount(line.id, parseInt(e.target.value, 10) || 0)}
-                          className="w-20 bg-slate-900 border border-slate-700 rounded-lg py-1 px-2 text-center text-xs font-mono font-bold text-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                          className="w-20 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg py-1 px-2 text-center text-xs font-mono font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-emerald-600"
                         />
                       </td>
 
@@ -240,16 +236,16 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
                         <span
                           className={`font-bold ${
                             line.variance < 0
-                              ? 'text-red-400'
+                              ? 'text-red-600 dark:text-red-400'
                               : line.variance > 0
-                              ? 'text-emerald-400'
-                              : 'text-slate-400'
+                              ? 'text-emerald-600 dark:text-emerald-400'
+                              : 'text-slate-500'
                           }`}
                         >
                           {line.variance > 0 ? `+${line.variance}` : line.variance} units
                         </span>
                         {line.variance !== 0 && (
-                          <div className="text-[10px] text-slate-400">
+                          <div className="text-[10px] text-slate-500">
                             ₦{Math.abs(line.varianceValue).toLocaleString()}
                           </div>
                         )}
@@ -260,7 +256,7 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
                           <select
                             value={line.reason}
                             onChange={(e) => updateCause(line.id, e.target.value)}
-                            className="bg-slate-900 border border-amber-800/60 text-amber-200 rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 max-w-[240px]"
+                            className="bg-white dark:bg-slate-900 border border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200 rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 max-w-[240px]"
                           >
                             {RANKED_VARIANCE_CAUSES.map((cause) => (
                               <option key={cause.id} value={cause.label}>
@@ -269,7 +265,7 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
                             ))}
                           </select>
                         ) : (
-                          <span className="text-[11px] text-emerald-400 flex items-center gap-1 font-medium">
+                          <span className="text-[11px] text-emerald-700 dark:text-emerald-400 flex items-center gap-1 font-semibold">
                             <CheckCircle2 className="w-3.5 h-3.5" />
                             Verified In Sync
                           </span>
@@ -284,14 +280,14 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
 
           {/* Action Row */}
           <div className="flex items-center justify-between pt-2">
-            <div className="text-xs text-slate-400">
+            <div className="text-xs text-slate-500">
               {canApprove ? (
-                <span className="text-emerald-400 flex items-center gap-1">
+                <span className="text-emerald-700 dark:text-emerald-400 flex items-center gap-1 font-medium">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   Your role ({currentUser.role}) has authority to approve ledger adjustments.
                 </span>
               ) : (
-                <span className="text-amber-400 flex items-center gap-1">
+                <span className="text-amber-700 dark:text-amber-400 flex items-center gap-1 font-medium">
                   <Info className="w-3.5 h-3.5" />
                   Count entered will be submitted for Manager or Owner approval.
                 </span>
@@ -301,7 +297,7 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
             <button
               type="button"
               onClick={handleFinishSession}
-              className="px-5 py-2.5 rounded-xl font-bold text-xs text-slate-950 bg-emerald-400 hover:bg-emerald-300 shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all"
+              className="px-5 py-2.5 rounded-lg font-semibold text-xs text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm flex items-center gap-2 transition-colors"
             >
               <Save className="w-4 h-4" />
               <span>Approve Variance & Post ADJUSTMENT to Ledger</span>
@@ -309,10 +305,10 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
           </div>
         </div>
       ) : (
-        <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center space-y-3">
-          <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto" />
-          <h4 className="font-bold text-sm text-white">No Physical Count Currently Active</h4>
-          <p className="text-xs text-slate-400 max-w-sm mx-auto">
+        <div className="p-8 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-3">
+          <CheckCircle2 className="w-8 h-8 text-emerald-600 dark:text-emerald-400 mx-auto" />
+          <h4 className="font-bold text-sm text-slate-900 dark:text-white">No Physical Count Currently Active</h4>
+          <p className="text-xs text-slate-500 max-w-sm mx-auto">
             Ready to perform a quick weekly count cycle on high-value or fast-moving shelf stock?
           </p>
           <button
@@ -347,7 +343,7 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
                 netVarianceValue: 0,
               });
             }}
-            className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 transition-colors inline-flex items-center gap-1.5"
+            className="px-4 py-2 rounded-lg text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors inline-flex items-center gap-1.5"
           >
             <Plus className="w-3.5 h-3.5" />
             Start Prioritized Count Session
@@ -357,37 +353,37 @@ export const VerificationTab: React.FC<VerificationTabProps> = ({
 
       {/* Historical Verification Sessions Audit */}
       <div className="space-y-3">
-        <h4 className="font-bold text-xs uppercase tracking-wider text-slate-400">
-          Previous Verification & Audit Logs
+        <h4 className="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">
+          Previous Verification Logs
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {verifications.map((v) => (
             <div
               key={v.id}
               onClick={() => setSelectedHistory(v)}
-              className={`p-4 rounded-xl border text-xs cursor-pointer transition-all ${
+              className={`p-4 rounded-lg border text-xs cursor-pointer transition-colors ${
                 selectedHistory?.id === v.id
-                  ? 'bg-slate-800/80 border-slate-600'
-                  : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                  ? 'bg-slate-100 dark:bg-slate-800 border-slate-400 dark:border-slate-600'
+                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-semibold text-white">Session #{v.id.slice(0, 10)}</span>
-                <span className="text-[10px] text-slate-400 font-mono">
+                <span className="font-semibold text-slate-900 dark:text-white">Session #{v.id.slice(0, 10)}</span>
+                <span className="text-[10px] text-slate-500 font-mono">
                   {new Date(v.startedAt).toLocaleDateString()}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-300">
+              <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-300">
                 <span>Items: {v.lines.length} SKUs counted</span>
                 <span
                   className={`font-mono font-bold ${
-                    v.netVarianceUnits < 0 ? 'text-red-400' : 'text-emerald-400'
+                    v.netVarianceUnits < 0 ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'
                   }`}
                 >
                   Net: {v.netVarianceUnits} units (₦{Math.abs(v.netVarianceValue).toLocaleString()})
                 </span>
               </div>
-              <div className="text-[10px] text-slate-400 mt-1">
+              <div className="text-[10px] text-slate-500 mt-1">
                 Audited by {v.startedByName}
               </div>
             </div>

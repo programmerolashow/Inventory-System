@@ -115,7 +115,7 @@ export const AvailabilityApiTab: React.FC<AvailabilityApiTabProps> = ({
   return (
     <div className="space-y-6">
       {/* Privacy Pledge Banner */}
-      <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-800/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="p-5 rounded-xl bg-slate-900 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="p-1 rounded-lg bg-emerald-500/20 text-emerald-400">
@@ -156,25 +156,25 @@ export const AvailabilityApiTab: React.FC<AvailabilityApiTabProps> = ({
       </div>
 
       {/* PRD Section 17 Hard Boundary Box */}
-      <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-start gap-3">
-        <ShieldAlert className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" />
+      <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start gap-3 transition-colors shadow-sm">
+        <ShieldAlert className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
         <div className="space-y-1 text-xs">
-          <div className="font-bold text-amber-300">
+          <div className="font-bold text-amber-700 dark:text-amber-300">
             PRD Section 17 Architectural Rule: Quantity, Never Identity
           </div>
-          <p className="text-slate-300 leading-relaxed">
-            This API returns <strong className="text-white">sellable quantity and stock confidence</strong> only.
-            It <strong className="text-red-400">never exposes cost price, profit margins, or supplier data</strong>,
-            and <strong className="text-red-400">never makes clinical equivalence or drug substitutability claims</strong>.
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+            This API returns <strong className="text-slate-900 dark:text-white">sellable quantity and stock confidence</strong> only.
+            It <strong className="text-red-600 dark:text-red-400">never exposes cost price, profit margins, or supplier data</strong>,
+            and <strong className="text-red-600 dark:text-red-400">never makes clinical equivalence or drug substitutability claims</strong>.
             Any substitution logic stays strictly inside the consuming platform (such as MediSwitch).
           </p>
         </div>
       </div>
 
       {/* API Key Credentials Box */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 transition-colors shadow-sm">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             Production API Secret Key
           </span>
           <button
@@ -208,21 +208,21 @@ export const AvailabilityApiTab: React.FC<AvailabilityApiTabProps> = ({
       {/* Interactive API Query Playground */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Request Builder */}
-        <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+        <div className="lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-4 transition-colors shadow-sm">
           <div className="flex items-center gap-2">
-            <Terminal className="w-4 h-4 text-emerald-400" />
-            <h4 className="font-bold text-xs uppercase tracking-wider text-white">
+            <Terminal className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <h4 className="font-bold text-xs uppercase tracking-wider text-slate-950 dark:text-white">
               Live Endpoint Sandbox
             </h4>
           </div>
 
           <div className="space-y-3 text-xs">
             <div className="space-y-1">
-              <label className="block text-slate-400">Select Test SKU</label>
+              <label className="block text-slate-600 dark:text-slate-400">Select Test SKU</label>
               <select
                 value={selectedSku}
                 onChange={(e) => setSelectedSku(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
               >
                 {products.map((p) => (
                   <option key={p.id} value={p.sku}>
@@ -234,18 +234,18 @@ export const AvailabilityApiTab: React.FC<AvailabilityApiTabProps> = ({
 
             {/* cURL Snippet */}
             <div className="space-y-1">
-              <div className="flex items-center justify-between text-slate-400">
+              <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                 <span>cURL Request</span>
                 <button
                   type="button"
                   onClick={copyToClipboard}
-                  className="text-[10px] text-emerald-400 hover:underline flex items-center gap-1"
+                  className="text-[10px] text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1"
                 >
                   {copiedCurl ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copiedCurl ? 'Copied' : 'Copy cURL'}
                 </button>
               </div>
-              <pre className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 overflow-x-auto">
+              <pre className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-800 dark:text-slate-300 overflow-x-auto">
                 {curlSnippet}
               </pre>
             </div>
@@ -254,7 +254,7 @@ export const AvailabilityApiTab: React.FC<AvailabilityApiTabProps> = ({
               type="button"
               disabled={isQuerying}
               onClick={handleTestQuery}
-              className="w-full py-2.5 px-4 rounded-xl font-bold text-xs text-slate-950 bg-emerald-400 hover:bg-emerald-300 shadow-md shadow-emerald-500/20 flex items-center justify-center gap-2 transition-all"
+              className="w-full py-2.5 px-4 rounded-lg font-semibold text-xs text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
             >
               {isQuerying ? 'Executing API Call...' : 'Execute GET /api/v1/availability'}
             </button>
@@ -262,7 +262,7 @@ export const AvailabilityApiTab: React.FC<AvailabilityApiTabProps> = ({
         </div>
 
         {/* Right: Live JSON Response Viewer */}
-        <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+        <div className="lg:col-span-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 flex flex-col justify-between transition-colors shadow-sm">
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
