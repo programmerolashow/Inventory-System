@@ -1,0 +1,7 @@
+{
+  "name": "Inventory Intelligence Platform",
+  "description": "Trust and intelligence layer for physical inventory with secure role-based access control, auditable ledger, action center, and verified availability API.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
